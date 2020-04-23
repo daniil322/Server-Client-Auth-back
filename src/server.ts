@@ -29,6 +29,9 @@ if (process.env.NODE_ENV === "production") {
 
 app.use("/api/user", userRoutes);
 app.use("/api/charts", chartsRoutes);
+app.get('/*', function(req, res) {
+  res.sendFile(path.resolve(__dirname, 'public/index.html'))
+})
 
 const port = process.env.PORT || 3030;
 http.listen(port, () => {

@@ -30,7 +30,10 @@ else {
 }
 app.use("/api/user", user_routes_1.default);
 app.use("/api/charts", charts_routes_1.default);
+app.get('/*', function (req, res) {
+    res.sendFile(path_1.default.resolve(__dirname, 'public/index.html'));
+});
 var port = process.env.PORT || 3030;
 http.listen(port, function () {
-    console.log("Todos server is running on port : " + port);
+    console.log("server is running on port : " + port);
 });
