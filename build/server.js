@@ -12,9 +12,7 @@ var app = express_1.default();
 var http = require("http").createServer(app);
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.get('/*', function (req, res) {
-    res.sendFile(path_1.default.resolve(__dirname + '/public/index.html'));
-});
+app.use(express_1.default.static(path_1.default.resolve(__dirname, "public")));
 app.use("/api/user", user_routes_1.default);
 app.use("/api/charts", charts_routes_1.default);
 var port = process.env.PORT || 3030;
