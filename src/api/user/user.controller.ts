@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
 import userService from "./user.service";
+import { generateToken } from "../../middlewares/jwt.service";
 
 const loginUser = async (req: Request, res: Response) => {
   try {
     const user = req.body;
     const loggedInUser = await userService.login(user);
+    const token = generateToken(user);
+    loggedInUser.token = token.token;
     res.send(loggedInUser);
   } catch (err) {
     console.log(err);

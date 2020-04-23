@@ -18,9 +18,12 @@ const login = async (user: User) => {
 const update = async (user: User) => {
   const collection = await dbService.getCollection("users");
   const objectId = new ObjectID(user._id);
+  const token = user.token;
   delete user._id;
+  delete user.token;
   try {
     await collection.updateOne({ _id: objectId }, { $set: user });
+    user.token = token;
     return user;
   } catch (err) {
     console.log(`ERROR: cannot update user ${user._id}`);
