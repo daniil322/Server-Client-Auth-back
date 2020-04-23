@@ -28,6 +28,8 @@ const registerUser = async (req: Request, res: Response) => {
   const newUser = req.body;
   try {
     const user = await userService.register(newUser);
+    const token = generateToken(user);
+    user.token = token.token;
     res.send(user);
   } catch (err) {
     console.log(err);

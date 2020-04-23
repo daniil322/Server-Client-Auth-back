@@ -3,7 +3,6 @@ import chartService from "./charts.service";
 
 const getChart = async (req: Request, res: Response) => {
   try {
-    const user = req.body;
     const chartsData = await chartService.getChartsData();
     res.send(chartsData);
   } catch (err) {

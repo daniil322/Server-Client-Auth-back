@@ -21,6 +21,7 @@ const update = async (user: User) => {
   const token = user.token;
   delete user._id;
   delete user.token;
+  console.log(token);
   try {
     await collection.updateOne({ _id: objectId }, { $set: user });
     user.token = token;

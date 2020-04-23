@@ -10,5 +10,5 @@ export default interface User {
   postalCode: string;
   about: string;
   _id?: string;
-  token?:string
+  token?: string;
 }
