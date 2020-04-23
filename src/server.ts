@@ -32,5 +32,5 @@ app.use("/api/charts", chartsRoutes);
 
 const port = process.env.PORT || 3030;
 http.listen(port, () => {
-  console.log("Todos server is running on port : " + port);
+  console.log("server is running on port : " + port);
 });
