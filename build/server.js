@@ -11,13 +11,28 @@ var user_routes_1 = __importDefault(require("./api/user/user.routes"));
 var charts_routes_1 = __importDefault(require("./api/chart/charts.routes"));
 var app = express_1.default();
 var http = require("http").createServer(app);
+var root = path_1.default.join(__dirname, "client", "public");
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
-    app.use(express_1.default.static(path_1.default.resolve(__dirname, "public")));
+if (process.env.NODE_ENV === "production") {
+    app.use(express_1.default.static(path_1.default.resolve(root)));
+}
+else {
+    var corsOptions = {
+        origin: [
+            "http://127.0.0.1:8080",
+            "http://localhost:8080",
+            "http://127.0.0.1:3000",
+            "http://localhost:3000",
+        ],
+        credentials: true,
+    };
+    app.use(cors_1.default(corsOptions));
+}
 app.use("/api/user", user_routes_1.default);
 app.use("/api/charts", charts_routes_1.default);
-app.get('/*', function (req, res) {
-    res.sendFile(path_1.default.resolve(__dirname, 'public/index.html'));
+app.get("/*", function (req, res) {
+    res.sendFile("index.html", { root: root });
 });
 var port = process.env.PORT || 3030;
 http.listen(port, function () {

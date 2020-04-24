@@ -8,12 +8,13 @@ import chartsRoutes from "./api/chart/charts.routes";
 
 const app = express();
 var http = require("http").createServer(app);
+const root = path.join(__dirname, "client", "public");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.resolve(__dirname, "public")));
+  app.use(express.static(path.resolve(root)));
 } else {
   const corsOptions = {
     origin: [
@@ -29,9 +30,9 @@ if (process.env.NODE_ENV === "production") {
 
 app.use("/api/user", userRoutes);
 app.use("/api/charts", chartsRoutes);
-app.get('/*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'public/index.html'))
-})
+app.get("/*", (req, res) => {
+  res.sendFile("index.html", { root });
+});
 
 const port = process.env.PORT || 3030;
 http.listen(port, () => {
