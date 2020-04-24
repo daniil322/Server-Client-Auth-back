@@ -13,21 +13,7 @@ var app = express_1.default();
 var http = require("http").createServer(app);
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
-if (process.env.NODE_ENV === "production") {
-    app.use(express_1.default.static(path_1.default.resolve(__dirname, 'public')));
-}
-else {
-    var corsOptions = {
-        origin: [
-            "http://127.0.0.1:8080",
-            "http://localhost:8080",
-            "http://127.0.0.1:3000",
-            "http://localhost:3000",
-        ],
-        credentials: true,
-    };
-    app.use(cors_1.default(corsOptions));
-}
+app.use(express_1.default.static(path_1.default.resolve(__dirname, 'public')));
 app.use("/api/user", user_routes_1.default);
 app.use("/api/charts", charts_routes_1.default);
 app.get('/*', function (req, res) {
