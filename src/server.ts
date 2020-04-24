@@ -8,7 +8,7 @@ import chartsRoutes from "./api/chart/charts.routes";
 
 const app = express();
 var http = require("http").createServer(app);
-const root = path.join(__dirname, "client", "public");
+const root = path.join(__dirname, "public");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -11,7 +11,7 @@ var user_routes_1 = __importDefault(require("./api/user/user.routes"));
 var charts_routes_1 = __importDefault(require("./api/chart/charts.routes"));
 var app = express_1.default();
 var http = require("http").createServer(app);
-var root = path_1.default.join(__dirname, "client", "public");
+var root = path_1.default.join(__dirname, "public");
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 if (process.env.NODE_ENV === "production") {
